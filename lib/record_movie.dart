@@ -20,7 +20,7 @@ class RecordMovie {
     return await _channel.invokeMethod("startRecord", parame ?? {});
   }
 
-  // 开始录制
+  // 清除缓存
   static Future<dynamic> cleanCache() async {
     return await _channel.invokeMethod("cleanCache");
   }

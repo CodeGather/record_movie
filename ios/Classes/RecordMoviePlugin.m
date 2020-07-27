@@ -8,7 +8,6 @@
 @implementation RecordMoviePlugin{
   FlutterEventSink eventSink;
   UIViewController *flutterViewController;
-  XDVideocamera *xDVideocamera;
   FlutterResult resultData;
 }
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
@@ -25,6 +24,9 @@
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
   if([@"startRecord" isEqualToString:call.method]){
+    // 初始化 XDVideocamera
+    XDVideocamera *xDVideocamera = [[XDVideocamera alloc]init];
+    
     xDVideocamera.modalPresentationStyle = UIModalPresentationFullScreen;
     xDVideocamera.edgesForExtendedLayout = YES;
 
@@ -43,26 +45,28 @@
       [dict setObject:@"" forKey: @"data"];
       [dict setObject:@"取消录制" forKey: @"msg"];
 
+      result(dict);
+
       if( weakSelf->eventSink != Nil ){
         weakSelf->eventSink(dict);
       }
-
-      result(dict);
     };
 
     xDVideocamera.completionBlock=^(NSMutableDictionary *fileUrl){
-      NSLog(@"成功返回数据%@",fileUrl);
+      result(fileUrl);
+      
       if( weakSelf->eventSink != Nil ){
         weakSelf->eventSink(fileUrl);
       }
-
-      result(fileUrl);
     };
 
     [flutterViewController presentViewController: xDVideocamera animated: false completion:^{
-        NSLog(@"进入摄像机");
+        NSLog(@"成功打开摄像机");
     }];
   } else if([@"cleanCache" isEqualToString:call.method]){
+    // 初始化 XDVideocamera
+    XDVideocamera *xDVideocamera = [[XDVideocamera alloc]init];
+    
     [xDVideocamera cleanCacheFile];
     result(@(TRUE));
   } else {
@@ -73,9 +77,6 @@
 
 #pragma mark - 获取到跟视图
 - (UIViewController *)getRootViewController {
-  // 初始化 XDVideocamera
-  xDVideocamera = [[XDVideocamera alloc]init];
-
   UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
   flutterViewController = window.rootViewController;
   return window.rootViewController;

@@ -547,7 +547,6 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
              isSaveGallery:_isSaveGallery
             backGroundTask:_backgroundTaskIdentifier
                    success:^(NSString *info){
-                      NSLog(@"%@",info);
                       // 清空录制数组数据
                       [self.videoArray removeAllObjects];
                       

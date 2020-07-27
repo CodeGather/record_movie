@@ -37,5 +37,7 @@ iOS端使用AVCaptureConnection、AVMutableComposition 等等
 
 7、iOS端事件代理、事件回调、线程执行、如何使用主线程等等问题
 
+8、iOS端使用result时代理方法只执行一次的问题，解决方案是去除全局的xDVideocamera，改成每次点击的时候都进行初始化
+
 <img src="https://raw.githubusercontent.com/CodeGather/record_movie/master/screenshot/android.gif" alt="android截图1" width="100">
 <img src="https://raw.githubusercontent.com/CodeGather/record_movie/master/screenshot/ios.gif" alt="android截图2" width="100">
