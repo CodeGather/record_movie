@@ -41,6 +41,7 @@ public class RecordMoviePlugin implements FlutterPlugin, ActivityAware, MethodCa
   private static final String EVENT_CHANNEL = "record_movie/event";
 
   public static EventChannel.EventSink _eventSink;
+  public static Result resultData;
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -67,6 +68,7 @@ public class RecordMoviePlugin implements FlutterPlugin, ActivityAware, MethodCa
 
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull final Result result) {
+    resultData = result;
     switch (call.method){
       case "startRecord":
         // 权限动态申请
@@ -161,7 +163,7 @@ public class RecordMoviePlugin implements FlutterPlugin, ActivityAware, MethodCa
   @Override
   public void onListen(Object arguments, EventChannel.EventSink events) {
     Log.d("TAG", "onListen: "+events);
-    if( events != null){
+    if( _eventSink == null){
       _eventSink = events;
     }
   }

@@ -195,6 +195,18 @@ public class RecordedActivity extends BaseActivity {
         rb_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("code", "205");
+                jsonObject.put("msg", "取消录制");
+                jsonObject.put("data", "");
+                //转化成json字符串
+
+                // 返回数据
+                if( RecordMoviePlugin._eventSink != null ){
+                    RecordMoviePlugin._eventSink.success(jsonObject);
+                }
+                RecordMoviePlugin.resultData.success(jsonObject);
+
                 // 判断是否开启回删功能，否则点击时直接退出页面
                 if(getIntent().getBooleanExtra("isOpenDel", true)){
                     onBackPressed();
@@ -454,7 +466,11 @@ public class RecordedActivity extends BaseActivity {
                 //转化成json字符串
 
                 // 返回数据
-                RecordMoviePlugin._eventSink.success(jsonObject);
+                if( RecordMoviePlugin._eventSink != null ){
+                    RecordMoviePlugin._eventSink.success(jsonObject);
+                }
+                RecordMoviePlugin.resultData.success(jsonObject);
+
                 // 删除录制的分段视频
                 deleteSplitFile();
                 // 销毁页面

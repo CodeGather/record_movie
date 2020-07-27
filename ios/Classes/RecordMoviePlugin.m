@@ -9,41 +9,56 @@
   FlutterEventSink eventSink;
   UIViewController *flutterViewController;
   XDVideocamera *xDVideocamera;
+  FlutterResult resultData;
 }
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   FlutterMethodChannel* channel = [FlutterMethodChannel  methodChannelWithName:@"record_movie" binaryMessenger:[registrar messenger]];
   FlutterEventChannel* eventChannel = [FlutterEventChannel  eventChannelWithName: @"record_movie/event" binaryMessenger:[registrar messenger]];
   RecordMoviePlugin* instance = [[RecordMoviePlugin alloc] init];
-  
+
   [eventChannel setStreamHandler: instance];
   [registrar addMethodCallDelegate:instance channel:channel];
-  
+
   [instance getRootViewController];
-  
+
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
   if([@"startRecord" isEqualToString:call.method]){
     xDVideocamera.modalPresentationStyle = UIModalPresentationFullScreen;
     xDVideocamera.edgesForExtendedLayout = YES;
-    
+
     __block typeof(self) weakSelf = self;
-    
+
     NSDictionary *dic = call.arguments;
-    
+
     if ([dic objectForKey:@"isSaveGallery"] && ([dic[@"isSaveGallery"] boolValue] == TRUE || [dic[@"isSaveGallery"] boolValue] == FALSE)) {
       xDVideocamera.isSaveGallery = [dic[@"isSaveGallery"] boolValue];
     }
-    
+
     xDVideocamera.cancelBlock=^(){
-      
+      NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+      [dict setObject:@"205" forKey: @"code"];
+      [dict setObject:@(FALSE) forKey: @"status"];
+      [dict setObject:@"" forKey: @"data"];
+      [dict setObject:@"取消录制" forKey: @"msg"];
+
+      if( weakSelf->eventSink != Nil ){
+        weakSelf->eventSink(dict);
+      }
+
+      result(dict);
     };
-    
+
     xDVideocamera.completionBlock=^(NSMutableDictionary *fileUrl){
       NSLog(@"成功返回数据%@",fileUrl);
-      weakSelf->eventSink(fileUrl);
+      if( weakSelf->eventSink != Nil ){
+        weakSelf->eventSink(fileUrl);
+      }
+
+      result(fileUrl);
     };
-    
+
     [flutterViewController presentViewController: xDVideocamera animated: false completion:^{
         NSLog(@"进入摄像机");
     }];
@@ -58,9 +73,12 @@
 
 #pragma mark - 获取到跟视图
 - (UIViewController *)getRootViewController {
-    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-    flutterViewController = window.rootViewController;
-    return window.rootViewController;
+  // 初始化 XDVideocamera
+  xDVideocamera = [[XDVideocamera alloc]init];
+
+  UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+  flutterViewController = window.rootViewController;
+  return window.rootViewController;
 }
 
 #pragma mark  ======在view上添加UIViewController========
@@ -84,7 +102,6 @@
 
 #pragma mark - IOS 主动发送通知s让 flutter调用监听 eventChannel start
 - (FlutterError*)onListenWithArguments:(id)arguments eventSink:(FlutterEventSink)eventSinks {
-  xDVideocamera = [[XDVideocamera alloc]init];
   if(eventSink == Nil){
     eventSink = eventSinks;
   }

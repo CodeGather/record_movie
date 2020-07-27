@@ -49,12 +49,13 @@ class _MyAppState extends State<MyApp> {
               Text('返回数据: $_resultMsg\n'),
               RaisedButton(
                 onPressed: () async{
-                  await RecordMovie.startRecord(parame: {
+                  final data = await RecordMovie.startRecord(parame: {
                     "isSaveGallery": false
 //                    "tipText": "测试提示文字哦",
 //                    "isOpenDel": false,
 //                    "progressWidth": 36
                   });
+                  print("------------$data");
                 },
                 child: Text('开始录制'),
               ),

@@ -266,6 +266,15 @@ static const CGFloat KMaxRecordTime = 10;    //最大录制时间
 
 #pragma mark - 返回点击事件
 - (void)clickBackButton{
+  // 取消
+  if (self.cancelBlock) {
+      self.cancelBlock();
+  }
+  
+  [self initData];
+}
+
+- (void)initData{
   dispatch_async(dispatch_get_main_queue(), ^{
     //主线程执行
     self.originKeyWindow.windowLevel = UIWindowLevelNormal;
@@ -286,23 +295,6 @@ static const CGFloat KMaxRecordTime = 10;    //最大录制时间
 //    });
 //}
 
-//#pragma mark - 收起视图
-- (void)dismiss:(BOOL)cancel{
-//  dispatch_async(dispatch_get_main_queue(), ^{
-//    CGRect rect = self.frame;
-//    rect.origin.y = self.height;
-//    NSLog(@"--------------------%f",self.height);
-//    // 显示状态栏
-//    [UIView animateWithDuration:0.25 animations:^{
-//        self.frame = rect;
-//    }completion:^(BOOL finished) {
-        [self.originKeyWindow makeKeyAndVisible];
-        [self removeFromSuperview];
-//
-        [self.delegate cancelClick];
-//    }];
-//  });
-}
 
 #pragma mark - 删除按钮
 - (UIButton *)deleteBtn{
@@ -381,9 +373,12 @@ static const CGFloat KMaxRecordTime = 10;    //最大录制时间
         self.completionBlock(info);
     }
     
-    [self clickBackButton];
+    [self initData];
    } failure:^(NSMutableDictionary *error){
-       NSLog(@"失败%@", error);
+     NSLog(@"失败%@", error);
+     if (self.cancelBlock) {
+         self.cancelBlock();
+     }
   }];
 }
 

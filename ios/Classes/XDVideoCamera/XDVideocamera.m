@@ -76,9 +76,8 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
   
   uiView.delegate = self;
   
-  uiView.cancelBlock = ^{
+  uiView.cancelBlock = self.cancelBlock;
   
-  };
   uiView.completionBlock = self.completionBlock;
   
   self.view = uiView;
@@ -346,8 +345,8 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 //取消按钮
 - (void)cancelClick {
     [self dismissViewControllerAnimated:YES completion:^{
-        [self freeArrayAndItemsInUrlArray:self.videoArray];
-        [self.videoArray removeAllObjects];
+      [self freeArrayAndItemsInUrlArray:self.videoArray];
+      [self.videoArray removeAllObjects];
     }];
 }
 
