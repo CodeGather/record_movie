@@ -73,6 +73,11 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
       self.previewLayer.masksToBounds = YES;
       self.focusView = focusView;
   }];
+
+  // 设置最大时间
+  uiView.KMaxRecordTime = self.KMaxRecordTime;
+  
+  [uiView setFormData:_dict];
   
   uiView.delegate = self;
   
@@ -344,10 +349,12 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 #pragma mark -- 按钮点击方法
 //取消按钮
 - (void)cancelClick {
+  dispatch_async(dispatch_get_main_queue(), ^{
     [self dismissViewControllerAnimated:YES completion:^{
       [self freeArrayAndItemsInUrlArray:self.videoArray];
       [self.videoArray removeAllObjects];
     }];
+  });
 }
 
 #pragma mark 切换闪光灯
@@ -468,7 +475,49 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 
 #pragma - 保存至相册
 - (void)saveImageToPhotoAlbum:(UIImage*)savedImage{
-    UIImageWriteToSavedPhotosAlbum(savedImage, self, nil, NULL);
+  UIImageWriteToSavedPhotosAlbum(savedImage, self, nil, NULL);
+  
+  NSData *imageData = UIImagePNGRepresentation(savedImage);
+  
+  NSString *path = [self createFile: imageData];
+  
+  [self.dict setObject:@"拍照完成" forKey:@"msg"];
+  [self.dict setObject:@200 forKey: @"code"];
+  [self.dict setObject:@(bool_true) forKey: @"status"];
+  [self.dict setObject:path forKey: @"data"];
+  
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  // NSData *data = [NSData dataWithContentsOfFile:storeUrl.path];
+  if ([fileManager fileExistsAtPath:path]) {
+      NSLog(@"图片存在");
+  } else {
+      NSLog(@"图片不存在");
+  }
+
+  if (self.completionBlock) {
+    self.completionBlock(self.dict);
+  }
+}
+
+#pragma - 创建临时路径
+- (NSString *)temporaryFilePath:(NSString *)suffix {
+  NSString *fileExtension = [@"image_%@" stringByAppendingString:suffix];
+  NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];
+  NSString *tmpFile = [NSString stringWithFormat:fileExtension, guid];
+  NSString *tmpDirectory = NSTemporaryDirectory();
+  NSString *tmpPath = [tmpDirectory stringByAppendingPathComponent:tmpFile];
+  return tmpPath;
+}
+
+// 保存为文件
+- (NSString *)createFile:(NSData *)data {
+  NSString *tmpPath = [self temporaryFilePath:@".jpg"];
+  if ([[NSFileManager defaultManager] createFileAtPath:tmpPath contents:data attributes:nil]) {
+    return tmpPath;
+  } else {
+    nil;
+  }
+  return tmpPath;
 }
 
 #pragma - 开始录制
@@ -557,7 +606,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
                 //      });
                       if (successBlock) {
                         [self.dict setObject:@"录制完成" forKey: @"msg"];
-                        [self.dict setObject:@"200" forKey: @"code"];
+                        [self.dict setObject:@200 forKey: @"code"];
                         [self.dict setObject:@(bool_true) forKey: @"status"];
                         [self.dict setObject:info forKey: @"data"];
                         successBlock(self.dict);

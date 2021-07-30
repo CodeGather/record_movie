@@ -1,4 +1,4 @@
-package com.jokui.rao.record_movie;
+package com.civiccloud.rao.record_movie;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

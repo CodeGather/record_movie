@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface XDVideoManager : NSObject
+@property (nonatomic, strong) UIAlertView *waittingAlert;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) AVAssetExportSession* assetExport;
 
 + (XDVideoManager *)defaultManager;
 

@@ -4,7 +4,7 @@
 
 
 static const CGFloat KTimerInterval = 0.02;  //进度条timer
-static const CGFloat KMaxRecordTime = 10;    //最大录制时间
+static const CGFloat KMaxRecordTime = 60;    //最大录制时间
 
 @interface VideoUI()
 @property (nonatomic, strong) SelectImageView *changeBt;
@@ -81,8 +81,6 @@ static const CGFloat KMaxRecordTime = 10;    //最大录制时间
   _focusView.layer.borderColor = [UIColor greenColor].CGColor;
   _focusView.layer.borderWidth = 1.5;
   _focusView.alpha = 0;
-  
-  self.progressView.totolProgress = KMaxRecordTime;
 
   [_VideoLayerView addSubview:_focusView];
   [_VideoLayerView addSubview:self.recordBackView];
@@ -376,8 +374,14 @@ static const CGFloat KMaxRecordTime = 10;    //最大录制时间
     [self initData];
    } failure:^(NSMutableDictionary *error){
      NSLog(@"失败%@", error);
-     if (self.cancelBlock) {
-         self.cancelBlock();
+     if ( error.count != 0 && error != nil &&![error isKindOfClass:[NSNull class]] ){
+      if (self.completionBlock) {
+          self.completionBlock(error);
+      }
+     } else {
+      if (self.cancelBlock) {
+          self.cancelBlock();
+      }
      }
   }];
 }
@@ -406,6 +410,10 @@ static const CGFloat KMaxRecordTime = 10;    //最大录制时间
     if (block) {
         block(_focusView,_VideoLayerView);
     }
+}
+
+- (void)setFormData:(NSMutableDictionary *)formData {
+  self.progressView.totolProgress = 60;
 }
 
 #pragma mark - 结束录制

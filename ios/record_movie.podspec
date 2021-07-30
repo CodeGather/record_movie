@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'record_movie'
-  s.version          = '0.0.1'
+  s.version          = '1.0.0'
   s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC
 A new flutter plugin project.
@@ -20,6 +20,8 @@ A new flutter plugin project.
 
   s.dependency 'Flutter'
   s.platform = :ios, '8.0'
+
+  s.frameworks   = "CoreGraphics", "QuartzCore"
 
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }

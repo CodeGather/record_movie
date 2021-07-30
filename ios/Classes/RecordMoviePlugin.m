@@ -34,13 +34,22 @@
 
     NSDictionary *dic = call.arguments;
 
-    if ([dic objectForKey:@"isSaveGallery"] && ([dic[@"isSaveGallery"] boolValue] == TRUE || [dic[@"isSaveGallery"] boolValue] == FALSE)) {
+    if ([dic objectForKey:@"isSaveGallery"] && [self isNullValue:dic[@"isSaveGallery"]] && [dic[@"isSaveGallery"] boolValue] == TRUE) {
       xDVideocamera.isSaveGallery = [dic[@"isSaveGallery"] boolValue];
+    } else {
+      xDVideocamera.isSaveGallery = YES;
     }
+    
+    if( [self isNullValue:dic[@"maxTime"]] ){
+      xDVideocamera.KMaxRecordTime = [dic[@"isSaveGallery"] floatValue];
+    } else {
+      xDVideocamera.KMaxRecordTime = 60;
+    }
+    
 
     xDVideocamera.cancelBlock=^(){
       NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
-      [dict setObject:@"205" forKey: @"code"];
+      [dict setObject:@205 forKey: @"code"];
       [dict setObject:@(FALSE) forKey: @"status"];
       [dict setObject:@"" forKey: @"data"];
       [dict setObject:@"取消录制" forKey: @"msg"];
@@ -74,6 +83,10 @@
   }
 }
 
+#pragma mark 判断是否null
+- (BOOL)isNullValue:(id)value {
+    return [value isEqual:[NSNull null]];
+}
 
 #pragma mark - 获取到跟视图
 - (UIViewController *)getRootViewController {

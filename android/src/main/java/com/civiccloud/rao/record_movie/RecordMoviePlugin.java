@@ -1,4 +1,4 @@
-package com.jokui.rao.record_movie;
+package com.civiccloud.rao.record_movie;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,7 +19,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
-import static com.jokui.rao.record_movie.PermissionsManager.checkVideoRecordPermission;
+import static com.civiccloud.rao.record_movie.PermissionsManager.checkVideoRecordPermission;
 
 
 /** RecordMoviePlugin */

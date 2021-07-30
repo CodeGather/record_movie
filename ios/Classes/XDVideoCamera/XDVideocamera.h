@@ -27,6 +27,7 @@ typedef void(^XDVideocameraCompletionBlock)(NSMutableDictionary *fileData);
 
 @interface XDVideocamera : UIViewController
 @property (assign,nonatomic) BOOL isSaveGallery;         //是否需要保存相册
+@property (assign,nonatomic) CGFloat KMaxRecordTime;         // 最大录制时间
 //@property (nonatomic, weak) id<XDVideocameraDelegate> delegate;
 // 用于回调事件
 @property (nonatomic, copy) XDVideocameraDismissBlock cancelBlock;

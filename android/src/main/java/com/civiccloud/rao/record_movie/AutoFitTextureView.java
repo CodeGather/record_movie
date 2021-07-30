@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.jokui.rao.record_movie;
+package com.civiccloud.rao.record_movie;
 
 import android.content.Context;
 import android.util.AttributeSet;

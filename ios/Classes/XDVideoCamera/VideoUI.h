@@ -1,3 +1,11 @@
+/*
+ * @Author: 21克的爱情
+ * @Date: 2017-06-02 16:22:13
+ * @Email: raohong07@163.com
+ * @LastEditors: 21克的爱情
+ * @LastEditTime: 2020-08-09 00:19:43
+ * @Description: 
+ */ 
 #import <UIKit/UIKit.h>
 #import "SelectView.h"
 #import "SelectImageView.h"
@@ -23,6 +31,7 @@ typedef void(^VideoUICompletionBlock)(NSMutableDictionary *fileData);
 @end
 
 @interface VideoUI : UIView
+@property (assign,nonatomic) CGFloat KMaxRecordTime;         // 最大录制时间
 
 // 用于其他地方调用
 @property (nonatomic, weak) id<VideoUIDelegate> delegate;
@@ -44,5 +53,6 @@ typedef void(^VideoUICompletionBlock)(NSMutableDictionary *fileData);
 //};
 
 - (void)viewsLinkBlock:(neededViewBlock)block;
+- (void)setFormData: (NSMutableDictionary *)formData;
 
 @end

@@ -1,4 +1,4 @@
-package com.jokui.rao.record_movie;
+package com.civiccloud.rao.record_movie;
 
 import android.annotation.TargetApi;
 import android.content.Context;

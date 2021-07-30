@@ -55,7 +55,7 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:layout_margin="30dp"/>
-        <com.jokui.rao.record_movie.weixinrecorded.view.CutView
+        <com.civiccloud.rao.record_movie.weixinrecorded.view.CutView
             android:id="@+id/cv_video"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

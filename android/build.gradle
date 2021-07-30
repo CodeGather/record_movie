@@ -1,4 +1,4 @@
-group 'com.jokui.rao.record_movie'
+group 'com.civiccloud.rao.record_movie'
 version '1.0'
 
 buildscript {

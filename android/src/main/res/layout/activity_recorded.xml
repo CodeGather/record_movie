@@ -126,7 +126,7 @@
             android:textColor="#fff"
             android:textSize="14sp" />
 
-        <com.jokui.rao.record_movie.RecordedButton
+        <com.civiccloud.rao.record_movie.RecordedButton
             android:id="@+id/rb_start"
             android:layout_width="100dp"
             android:layout_height="120dp"

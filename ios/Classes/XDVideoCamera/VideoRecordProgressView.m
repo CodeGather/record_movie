@@ -37,10 +37,10 @@
   CGPoint center = CGPointMake(self.width/2, self.height/2); //设置圆心位置
   CGFloat radius = !_isChangeRaidus ? self.width/2 - 13 : self.width/2 - 2; //设置半径
   CGFloat startA = - M_PI_2; //圆起点位置
-  CGFloat endA = -M_PI_2 + M_PI * 2 * _progress/10; //圆终点位置
+  CGFloat endA = -M_PI_2 + M_PI * 2 * _progress/(self.totolProgress == 0 ? 60 : self.totolProgress); //圆终点位置
     
   // 绘制进度
-  [[UIColor colorWithHex:0xe60044] set]; // 颜色
+  [[UIColor colorWithHex:0x3A71FF] set]; // 颜色
   CGContextSetLineWidth(ctx, 4); //设置线条宽度
   CGContextAddArc(ctx, center.x, center.y, radius, startA, endA, 0);
   CGContextStrokePath(ctx); //渲染

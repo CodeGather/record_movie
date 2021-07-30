@@ -1,4 +1,4 @@
-package com.jokui.rao.record_movie;
+package com.civiccloud.rao.record_movie;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +22,6 @@ import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -196,7 +195,8 @@ public class RecordedActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("code", "205");
+                jsonObject.put("code", 205);
+                jsonObject.put("status", false);
                 jsonObject.put("msg", "取消录制");
                 jsonObject.put("data", "");
                 //转化成json字符串
@@ -460,7 +460,8 @@ public class RecordedActivity extends BaseActivity {
 
                 JSONObject jsonObject = new JSONObject();
 
-                jsonObject.put("code", "200");
+                jsonObject.put("code", 200);
+                jsonObject.put("status", true);
                 jsonObject.put("msg", "视频录制完成");
                 jsonObject.put("data", result);
                 //转化成json字符串

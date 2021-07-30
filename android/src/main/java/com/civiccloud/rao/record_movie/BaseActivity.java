@@ -1,4 +1,4 @@
-package com.jokui.rao.record_movie;
+package com.civiccloud.rao.record_movie;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import com.jokui.rao.record_movie.R;
+import com.civiccloud.rao.record_movie.R;
 
 /**
  * Created by zhaoshuang on 17/2/23.
