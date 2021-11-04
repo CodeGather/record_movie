@@ -1,5 +1,5 @@
 group 'com.civiccloud.rao.record_movie'
-version '1.0'
+version '1.0.1'
 
 buildscript {
     repositories {

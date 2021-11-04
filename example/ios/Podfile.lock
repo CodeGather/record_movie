@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - record_movie (0.0.1):
+  - record_movie (1.0.0):
     - Flutter
 
 DEPENDENCIES:
@@ -14,9 +14,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/record_movie/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  record_movie: 0e7c9389d6cd09e9534f366b83649217e9eb67da
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  record_movie: c0afdf59b434ab59ba2cd41c7baa093751e39cf5
 
-PODFILE CHECKSUM: f32fb4e7c14f8b3ca19a369d7be425dd9241af27
+PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.0

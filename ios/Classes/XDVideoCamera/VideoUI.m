@@ -6,6 +6,28 @@
 static const CGFloat KTimerInterval = 0.02;  //进度条timer
 static const CGFloat KMaxRecordTime = 60;    //最大录制时间
 
+//  闪光灯打开按钮
+NSString *videoFlashOpen = @"iVBORw0KGgoAAAANSUhEUgAAADQAAABECAMAAAD5hOYYAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACHUExURQAAAAAAAAAAAAAAAAAAAAAAAAAAAEdwTAAAAAAAAAEBAQAAAAAAAAAAAAMDAwEBAe/v79/f3wQEBIaGhv7+/k1NTfj4+Lu7u/39/dPT0////8bGxvX19b29vfb29qGhoerq6uTk5Pv7++vr6/z8/Pr6+nh4ePn5+d7e3vT09O/v76Ojo////w92BwUAAAAsdFJOUwEODAgTAgkAAwYRBBUaFx2eeiMo9x/NT+5i/Fu6QMY4l4DgiOfcOdRvsKhT6M4gaAAAA/dJREFUSMedl+liojAUhUFwaUyggohURa17zfs/35x7E5YgjJ25/0r9uPsh8ab/YV737zf2CvHjMdvMNfOw4jwX4Z/PB4xYplzIEB/91sYcholg0msBcbMuxAyIEZnftdEImKU6DBDfF46FbEKAm4DqQMTAhf2VNSkjY+DYF7mqITgC44vic8hOKblqQewomIzE7ksP2tbvQNZReBhm9MMfBS5EjpDPt9aHxavRu75TF6Lo2NFO63WmFCeOKkSRiuMkSa5413ofuuF5HkcnwhOCACKpxlRGS620XuZSuIUgRwEcyZvWBZeXGyrgi6Ct1l9FFCK6j6ZPNjoR7vHGjBkzFiIk6AcJLaKwduS50R1RVzDU/AkNB0EKIesDImZHLWg8M9Eh9rukV05obhmK7mB+mKky8uqUyFGK2FMweCXMQJsv9i78JjjPiW6hdWle+UHzjifRbqn1LWv5qTaXxoGjK5FwyxGY/ZmaGrnD6jnRIZLU/N8y6YWaqlqVq4Sljg4prziQgBMKo4ybGvdCNroQPTyajDkhqbipSQ3NHcjMXYac9zY6dvRJTU2SOFZSVE2yUB1dgTrZ6NgRNxXTyq78Vnxeq3YPrU9NdJShLp/PZ77ZFEWRdiHjKFtrvZMV5HdW+FJNK0NVdHKDjthpIU8nd2vXXIo2RNFFmOWDCZ5zSsvz9+VyW63KknzeXQjDyo1E73NT3EkQcPUULW2SHKkgoRueTSnX+hzbOhE0EpYqSFJ4A5tCWEiiKZ+x6aNdJl7AJEf3yqxe9akDIbpNYlz5dgNp1/eo6SWN2tE1EGRI35D0dnsSvLdmbUmGzvuX2bOacmyquxG1QPDE7lqj10Ckx7RsFRTWUmRliOZx3oiXVwtyttvleb5Z8koRI+zEypfPhYFM0alYV/QeY8FKKblBrwxPBLkKbLEwSytFAgumwCQ8ZN9niaDqiwENhrT8kJJDxU2DQtGROwtVFAWILI6KPwCmQY50tU4sTBkpjxT0aBODUkZSehkrLKaCyErh9dcYZiTFMnOXqcSymiVI7JKY+EENCs2SO0VonY0qCKO+IlE41A3qYRwIOVHxAC0GGtSB7PZS8ZKENP8RGX3uYRwIdaDiJU80aNXbIAeyKx8pLNX1ypove4vtQlQHbAKKd+UGReEw04FQvEtJDepu0CCEOtzNQhVKDhS7z5M54xxJJ/qL/QoJWlRokoqaD/n0LUQHI71VLyeGYQjNRfHQIPmOafrEa7hGg8K/NOgVIkk6pn1H1QGID7Ak4BN7KB6Ph5kG4iN50D5+T99CTM2rg/5f/TRT7jWXjNk7poHs5WRW3V5+c3+y16Nx+5r0i0tX92b1Dze1X9kfFumdI6DW+VoAAAAASUVORK5CYII=";
+
+//  闪光灯关闭按钮
+NSString *videoFlashClose = @"iVBORw0KGgoAAAANSUhEUgAAADQAAABECAMAAAD5hOYYAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABIUExURQAAAAQEBAUFBRISEkdwTAAAAAAAAAAAAAEBAQAAAPb29v39/cXFxWxsbJmZmfn5+fv7++np6fLy8uHh4dPT0+7u7q6urv///0WeE+MAAAAXdFJOUwEWHCYABgoCEg3F9VYqONfmkLR7aKNLdBSGJwAAA6RJREFUSMeNl+mWgjAMhWkLyI6IwPu/6eQmTTfRM/kxZ47ymeRmaalqtkqs/p9VAaj+D3roIfZPqqojoti/IDzciAV33yyBmmiPX+a5SpkW1vy0EL5CrZo+0WYWOYX4kW3cerL2hwVKoX68rqnr+h8mmKcecNS/rms1pvthwApoIVe7+WWEMZVA3XZdz9lau7yGL3bMvXdVs3oEzc/r2giiOL/Z9gF17+saF+fG79A7Qhxf33dmuK6XmyjK6dMGOOpSSFyZk76YDgmSM8cf+t85R1FcLyNQlUGWgJWiO5lhmRmycH8NNoESauZ8no4grrNSJ32+ziZEV/Gsq6sd0AFH0hsCLU9UAx/lkFJPpAVH3DVQx9h5hazGJDLUqSuDhJcCIuHGKfRDCqmrlTNWCOGh2G/2o0zt5ze4Ytk1JXxAiqInUyaDWv/QCvE6kWFDUa1PKIOqGB/LvkuZKB8uqo2QbJYkp0ZyINnHWYbBTvQLg7uFeIlxeKzWyqWyWlTnLMvpZymFGskJ7YaeOcFIUZ1zvgacU4CUMTMgFGaghuOinsTM87IssbQKCUNjCAnsgspYN2SzdCC+CAW9d7Q/GvRA1575AD6TpKo6ji799I6kLcvuVnl6HLn39xISRzP3HQ8Qy+6gAWz3U5uFF3fEYL1Bdo9kUxvU0757SXRhVE9hUKwwtSWERBb1hEU2MLOEqc2K6yFE8VzJhje5wrNv1AgFziYwg7aoLlxh4RKECTyT1sugtp/GDOKF624mMK+TQbcsO8+Cl50n0JZMgGSYKJmNl6UR2f0E9n3G1HHveeqFvuPNCtl5AruCUcjX1/Dvn1ZGECI4my3W9MYCyrsiOXRuWfYESq852YpYIJ4/+lj22dxDnuJpf8vekyODZTdZB0VILgYc36a7nLcRn3MmbfAE4gq3sWvDQTNwg3efkuu21LVMB8C5e1eycLNuTSDd5RAPK/LwG5avF6WrAlp4O4wC4VCT60XhqoCoCwZZd50canK9yLZeAfFOfvEZxmcNKJxzWxFfAR2ygCT3ViuH30jjK8KTBfn2jd2G64WP7x6SFefbza93lv0HtMjp7tVSCudc1yZK5NDEK84fEY1f8Xyrm75BtCewrjoVWA+Tdicp/OmZQ0LtxxxukI94JV5MmxyEGcSxtHpXrbKLdNPc1Cm9aMdb8SO95z/uoM/vyzeKqoSq8oUjfpy8NBRDePt1df+alED6ffoSdf9ClmyLL69rNx/+ASAwZY9EY+1bAAAAAElFTkSuQmCC";
+
+//  取消按钮
+NSString *backImageStr = @"iVBORw0KGgoAAAANSUhEUgAAADoAAAAgCAYAAABD9mvVAAAAAXNSR0IArs4c6QAAAQFJREFUWAnd2dsJwzAMBdCEbpGf/meoLtUdOlC36BTuVYma2Djk5YeuBcIPTNBBkA+766Zwzt2QD10zj3AM0fon5AujxDN6iGRT6kd+kKNXMjakk4rE9BeUWFQuSA0fi907UjbDoMKi+CVSLW9M+n9nsRiRtFjUHkP6HVUtK/YQkhV7CsmGvYRkwSZBWscmRVrFZkFaw2ZFWsEWQdbGFkXWwlZBlsZWRZbCmkDmxppC5sKaRKbGmkamwlIgr2KpkGexlMijWGrkHiyAfRPIHVi5mQsjfpGlH7M+QrN2u7iEciO1CRvYNpAb2LaQK9g2kQFWfkb+A5AeaGkEcn4LKQj7AkzjlUFYls00AAAAAElFTkSuQmCC";
+
+// 录制视频按钮
+NSString *recordVideoCamera = @"iVBORw0KGgoAAAANSUhEUgAAADwAAAAtCAYAAADydghMAAAAAXNSR0IArs4c6QAABEtJREFUaAXtmr9rFEEUxz0NmpgIEjTREEglYhUr61gFFAtBEwQtjGX+gXQpRAL5D+zFqBEsLNRCFLSzEhRBhETiz8IgaISIen6+l53l5czu3t68I+Hwwffm7c7M973v7tzs7Nxt2+Zk1Wq1C1wGC+APiDVxLABxdjml+S8N5FfAKsgy1V2xPTneDh5mdXA4L+7tNqabD/G3BhL8ZgPS/nwDfWKbnLcx3XyyauYOPzZqZvF3xCYkDiCuYI9jOV36k80A+J1k9Yuy34UYEnEBccoUYyCW2+N7MU4SgedRpVL5HJtU6J9wPUqOFUOx4o0rNwiugw8gxibis1nPQDITMQnRV5qkbVDMlcR5jt+7PlTpo5/06OeufC3dM6cD+e2lWqNmZ06zRqqWaTSsYTILYsUq4H1vsSJNOO/LjzRpnNXEYIfxiUjSLdcdfSdBsA8a0tWQJVezEvx2Kq3GMLu2k75cLR25tU6VXGGNnFPgDDgGDoJd4BN4Cx6AOwywV5StNd3uYN6R4NUa+wJ4EWIUlPPUH2pBHmlYTVqpeQaCtBPcSckbd1ZoOuacSxq9JYJh7wVP0yhrzhcKveodB1ro6IIMgXFwG9S/Uk56iYY7tVYJvpdGWHNmKLrzBFB/FLxca1771Bp6NK9Po3WGs+ouGPKzJoCSvlQisT20tyNjiePol3+Tj69giHvAexNAq7hSRt/9dRxTpQg2aGzycRc8AvmPJMAi5e4N4heeot/FhEPF68IOBQ0Ml6/gEJcAGpp94TivpJ1We1eBdlos7CT23dRp8is1i9M+NffvcJ64rDqy0e7GXJpVtrNM1fEsnqzzls5dMOTTQAuIUqs42kv0TZBlb6g4nCUq77wldBMM6S5wzZA3I7qD/rcMR3Cf4OzLE5VXF0hUughWMkBJ1ZuSL3unJVoXK5guotbdTVsgUhktGI7DQMMty25QUWoXk/ZB9HTTKk1Hm1iUYIi0TNREUmSakEqJNvlGuza5pgVDMgb0iAiPEj06gumREs6HUo+ehjYYaNcHeqKVJgRwpda04I2SgfV1ysziYaM2RefovxssJjxaxIwU9SmqT7hqhbfgKUOuJWbpmZU+9tcGcUTfaZNT/KRlry7E+gVxyQR4ir/HtsnzaXsJ6IUj2Nm89o3WBTKVrndYCcA5CmzSeuU7mpcc9d1gBli7l9enTJ0ldResRAgwaYPgaxLTS74muiGgl/9BoFn+MtDkZ00jw2OvvHZdLHFLBCeitZOxYoM16GtbqLOWqdOHjdsywYnoQwSzqyYbu97XRp82/Ny3jm0gvZq1fCOeEEe4AKeBtmyGwAGwCj6CZ2Ae3GWbNs2FYzdbp3Hdwf9fHtwu8pYhcv++bBllGYn8F5xxYdrmtO6wZsqaMYGdDH67lHWaPuqxdB1x59pFYIGOOQnWnz08/uNREGvTq9f+48Gj9x2pDIM5kA7vTU/PLwFpkrZhaf0LHnAt9XQv4eoAAAAASUVORK5CYII=";
+
+// 点击删除按钮图标
+NSString * videoDelete = @"iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAMAAAAL34HQAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABIUExURf///x949V+e+VaY+f///xdz9RFv9EdwTP///////yx+9v///////////xRw9cjf/5vD/P///0ON93qv+xt09TWF9iV69hFu9EcWMN8AAAAXdFJOUya6WGAh2PgAEwOZHAcM6y87GXJIyYeqbZXNwgAABMlJREFUeNrNnOm6oyAMhqOigwXq0u3+73Ss2nqqAgm4JD997Mx7IPkIEQL/4qzURjaNUkJAZ0Io1TTS6DLyn4Xwn3ZAqodZM6E6uMOxStNYif6wNaY8DktLBNIXTeojsEoK04es3BerNAqCTBFnE/YdqNAhAwIURBoBDA6DIoHBgVAEMBSWEbCZCbMRlm5gU2v0FlgSNjcZjVUq2MFUGYe1pVdRPAyOnkDcRLqwtIIdTekwLC1gVxM6BMvA7mboWAdQObjgeGfHOD6cSmXlgnOpbFxwMpWFC87ydrffw+lUq1xLLA2Hm/Zj7a3tOL1fYCk4wZQPS8IpJt1YBk4y48IqxVlYonRgKTjNlB1LwokmbVgaTjVtwWrOxWrWsQycbGYN67woXIlG4OHvc6//YpXAwMoFluSAJedYLAZrGi7gNFjTcAGrwfoOF7AarO9wARPNmmkX8BD4udRDQEJTZ4+L3drpxXR6+khJCQ6QHb66vNx2+bzZ/jy+3whOD1SHr68eqtf182ry+7zI8E7fYxEcvsp9VK/7593nnLdGOf0Hi5L+3ce/3G7TZFXJ9LT/VYJOB4E2h8MAPCpygKXvuS8q7CwCaQ4fA1VI4Pf+f8POIlDicAitZ5Aepe+fZthYBIKWpsWPR++GZXqshiQNebU7VtNjCYo04II8Dku8sTRFGooU9sfqJAKwrjVIQwtHYJkOS+4tDXQs2WGpGGmos/UIqNosAkt1WCJCGrrn17X/qs4XKw0FS/yDMkYa3jlC0Vrer4OxOigdIw3JahzceqrZAkjC0oAIxMQqDQPALBLStYc0LAMyShpGrsvCDxfvk7AkNHHSMCarU4xmPdXS4UhYjRcr82QN9ZCuJqMntYUlPyZieWTr5s0a6iFhvVeTvq35IQlLebAwWUM1cQ0Tfk0hGkv4g/B6w4TqK69Hqlvs4tNBObFqZNYwBOvVQUXF8i+FmKxh2tLmdfxSjRKHCv2mg2p7LFTmN25rixYOwEqxefIYjQ4uIpbbu/JJksCvXa71YMtIHBc43yb9o/RXBxcRS2HS0guG6rm2cO+j8p/Qd4nEH5gvYDSWN4NIPLWpn5xrtnDvl0F8ctObqxQzOVT1d+GOwPKngcNybZGJRXpVJeuySkwDEUnzmNxUdqpsuUDOuYhJM2avn9lqeelq0jdESR61xUBVtx6WwH+up1cDVxqzIcMVbCwycbEEw/vPKML3iQK72bdsyrq4y1dDNMvzNm6zjyuNeGRi+9IIspA0ZvX1EViGUHZzyMQeZTd0/TuLqDPTi5T4wyIPRDaxBVZDK4AjsolNsAzxc4GjdoOrJ+J+WVI/roTLxJBZ1EjXon6KGmSiuCdUG+QFqVr0D3eDTARaipQH+mfOUSaC7IKVh4CPwpDmYVAFMoJl2Cf0Lqie95xq9wd22SpDDxzsaor/8Qymh1mYHv3helCK6bEyrofwmB5Z5HrAk+lxWK6Hh5keteZ6MJ3rMX6mlx64XhHheqGG6fUjrpe1uF5t43oRkOm1Sa6XTLleyeV6gZnrdW+ul+O5thLg2niBa5sKrk09uLZA4dowhm17Ha7NiLi2bmLb6IprWzC2TdS4tpxj26CPbTtDts0f2bbK5NtYlG8bVr5Na/du8fsfOXD35ibUxFoAAAAASUVORK5CYII=";
+
+// 点击删除按钮图标
+NSString *videoClickDelete = @"iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABIUExURf////////9TSf+rpv////+8t/9BNkdwTP////////////////9EOf94cP/d2v89Mv+Ujf////9NQ/9gV/9IPv+Eff9oYP87MDxVGDIAAAAXdFJOU0ALuV4kVugAOgYzGOGFSfVsLsii1HmWOJJf6wAAAxxJREFUaN7Fmtl2qzAMRWUw1ANhCpT//9PLcJMw2LIIRj0vWZQFu7KPhTzAD1FaWNkYoxSAUsY00gpNfRZIACvHdx+lpNVxIMIN+IDEVYi2BoIyoXhQiJZAlNRfQgQZMWPEFxB9CoFH44NYBael7CmIbuArNZoO+SYMLBgXRMIFSRJEG7gko8MQoeCilAhBrjMcFIjPOFLgBsYo4YdEY+xiWUN0NMZI0R6IgYgyboiEqJIuiIXIskdIzA7Zd8sb0kB0NXuIhRtkt5D4jbVuMLjFWTuHLRABN0msIPIuiPxANNwm/YbI+yDyBbkxkCUUCI+RrH8clP6/tVz1GT5WIJR9y2RwqJpfW1av6zbDsjGE/NsNTtVzIJ/rokRcDIFun+LokoMey93HctWOEf0iXT9CsIzyHJDHP3qMDebNLRNE4w8PCcFC6dheiL8A81ZdIf8hGWJHiL9L0grrUDJEjhBvl5TFMOQZXIaoH9CYeasarkNGhMDM26+N1vVbUxRPIkSAJZp3GniP3f2SBrEgqebtNtSJ0RIjkdBQzVtOlOeqLduSCGnAmR0zl3lnSvJOmgm5440T4jFv2S7vfv3SIcptLLd551bK1u1GgSgXpNyZd+ep6sAIQhzqkYz1O389fk8NRt/4zX0pa7LEUKUnIa5Ycm8oaT5HkqdwtU+m9nJ/RqbhUz2rgy9CEHPig1gvr59/erg4To7ZcQnwFcLcaI8TEHdamUb3vnv7T2dk+TbUUFrxJMgy3w/6KWW+/5IVG0ooQVrit3cq5Ipsm8jIqd770aqHrZGLoSu3iSwnf7Q0tR4q99kspaZ6jRQS1MqOUEhgVWriz5QnSyKkuHMZ+bviDitTj0b2Qjq0TEUL7tnIdRZQ2iIlswpPHeqBqBqfOojQrICiJ+CToMBiWpoUeUBFUkNgOnfP4s1+YsoyxWZZLOBZ9mBZwOFZimJZVONZHmRZ6ORZsuVZfGZZRufZEODZ2uDZpGHZbopHUeL+LUAQf7+ZybMty7PBzLNVzrTpz3N8gecgBtOREp7DMUzHfJgOLDEdveI6RBbhONw/vU9wP0NbQIIAAAAASUVORK5CYII=";
+
+// 视频录制完成按钮图标
+NSString * videoFinsh = @"iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAMAAAAL34HQAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABIUExURUdwTP///////////////////////////////////////////4O0+xNv9KrM/UqR99bn/2Kg+BZx9St+9jqH9xt09SN59hFu9KLVwU8AAAAXdFJOUwAkPi0VMx5ABzoDDGj3V5RJfu2/qODQgzXOYAAAA8BJREFUeNrNnOnSqjAMhoUuaUEF9/u/049Bz1FRsEkX3vzW8Zk2a02y2cRJ02pbKWWM93Vde2OUqqxum81q4nSlPM2IV5V2ayDNEr2wFUVrK0PBYqq2yDlZBtODzGY+s0YrEonS+YygsZ7E4m0eMFdFQN0NwGWAqila6sRgjU0ANYKlvErtKZl4ner+FCUVleQmU93f603GH5WhDGIcjlal07CKskkFdoGxF9l6yipelFromjJLrRGpJFyWioiFMcEIgyxGxeKyVFCC71FTUdE4Nsi3x7Yw1cAV4Fedp+Lif8chQyuIAXINDDehaSXRaIoVoF6GVhMD4t2Dvb2r18Sq565R0aqiwKxw0RobvzaWb9D0fVbr19X3Wa2vCEAqxMP6clwQh/VxXOub4VdjtAQiFvGwJselCUY0TjSciYyuzC92py7gU66wwp9ut1vHUfoiSel5oLqdGGlqW8J/j1Qhp0VtQQ/f3QIP6+npC9zhYaS69oxiw5WiuvRhn3aFfOl2N1LtWR61KkN1DKV6KFfueLg/8qjIl1CtO9Vuy/iKy69a/YVNNSpXXtXqr6MRHtg5at7sQUI1ZhFZNf4UHHImOt/kDIR3qjP7i03WOH0WUg3ROqMhMsLzhynazFRXWf3D9A/bLtQDcZKGTw/B8w+HYLt6hGcR1eAhFN/gD+FUexJiGYFt/ebacsPzNBPkYQVGuEfSsCUxFtPJB+UDe0F4nrh5buwJyJ4eR3qgCCz2c9vPXFOUNEyiFh/rp+nLwvMES5BALDvKBFQC3frFJQ7P71ii2nU+CJ/F4TnGb/369S4J1YAlzJm/31VMeI6JicuazavpF7HEhc/1gysqaZgkNuI08MNrcmv6xTRQnjRPYsz+mIxqSJrlJUb9FpEFNf1SiRFTkL3kL/0lIdVQkEWVr/+zvQThefJkE1Xs/8uNk1KNxX7U00h9GLl2CcLz5Gkksn69u9AE4XnykBT57FZ3yanub7qxTzaJwvO7xid4dztLa/oF1UrxStmdzn1CLJ3s74KkfQFu9a6t7zkgVLPBu2qV+eOOFac3gLdo8Log7ilg4b/QWXaI23CA2p4B2swC2vqD2igF2laG2oQH2rKI2uAJ2g6L2jwM2mqN2piO2sYPOvSAOiKCOlADOn6EOqyFOtqGOggIOjaJOmSKOpKLOsCMOu6NOhyPukoAdfEC6poK1KUeqCtQUBfGwK7XQV1GhLq6CXbRFepaMNglaqgr52AX9MGuM4Rd/gi7KhN3sSjuGtYnGtrS2qcR5Fnx+wfCRwED+ftUlQAAAABJRU5ErkJggg==";
+
+
 @interface VideoUI()
 @property (nonatomic, strong) SelectImageView *changeBt;
 @property (nonatomic, strong) SelectImageView *videoBt;
@@ -92,6 +114,7 @@ static const CGFloat KMaxRecordTime = 60;    //最大录制时间
   [_VideoLayerView addSubview:self.backBtn];
   [_VideoLayerView addSubview:self.deleteBtn];
   [_VideoLayerView addSubview:self.finishBtn];
+  
   
   [self addSubview:_VideoLayerView];
 }
@@ -218,9 +241,16 @@ static const CGFloat KMaxRecordTime = 60;    //最大录制时间
 - (UIButton *)flashBtn{
     if (!_flashButton) {
         _flashButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_flashButton setImage:[UIImage imageNamed:@"video_flash_close"] forState:UIControlStateNormal];
-        _flashButton.frame = CGRectMake(20, 20, 36, 36);
-        [_flashButton addTarget:self action:@selector(clickSwitchFlash) forControlEvents:UIControlEventTouchUpInside];
+//        [_switchCameraButton setImage:[UIImage imageNamed:@"record_video_camera"] forState:UIControlStateNormal];
+      
+      NSData *imageData = [[NSData alloc] initWithBase64EncodedString: videoFlashClose options:NSDataBase64DecodingIgnoreUnknownCharacters];
+      [_flashButton setImage: [UIImage imageWithData:imageData] forState:UIControlStateNormal];
+//      _flashButton.backgroundColor = [UIColor purpleColor];
+      // 设置图片的填充
+      [_flashButton setImageEdgeInsets: UIEdgeInsetsMake(5, 10, 5, 10)];
+      [_flashButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+      _flashButton.frame = CGRectMake(10, 20, 40, 40);
+      [_flashButton addTarget:self action:@selector(clickSwitchFlash) forControlEvents:UIControlEventTouchUpInside];
     }
     return _flashButton;
 }
@@ -228,16 +258,26 @@ static const CGFloat KMaxRecordTime = 60;    //最大录制时间
 #pragma mark - 闪关灯点击事件
 - (void)clickSwitchFlash{
   BOOL openedFlash = [self.delegate switchFlash];
-  [self.flashButton setImage:[UIImage imageNamed: openedFlash ? @"video_flash_open" : @"video_flash_close"] forState:UIControlStateNormal];
+  
+  NSData *flashImageData = [[NSData alloc] initWithBase64EncodedString: openedFlash ? videoFlashOpen : videoFlashClose options:NSDataBase64DecodingIgnoreUnknownCharacters];
+  [self.flashButton setImage:[UIImage imageWithData:flashImageData] forState:UIControlStateNormal];
 }
 
 #pragma mark - 相机切换
 - (UIButton *)switchCameraBtn{
     if (!_switchCameraButton) {
         _switchCameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_switchCameraButton setImage:[UIImage imageNamed:@"record_video_camera"] forState:UIControlStateNormal];
-        _switchCameraButton.frame = CGRectMake(self.width - 20 - 28, 20, 30, 28);
-        [_switchCameraButton addTarget:self action:@selector(clickSwitchCamera) forControlEvents:UIControlEventTouchUpInside];
+      
+//        [_switchCameraButton setImage:[UIImage imageNamed:@"record_video_camera"] forState:UIControlStateNormal];
+      
+      NSData *imageData = [[NSData alloc] initWithBase64EncodedString: recordVideoCamera options:NSDataBase64DecodingIgnoreUnknownCharacters];
+      [_switchCameraButton setImage: [UIImage imageWithData:imageData] forState:UIControlStateNormal];
+//      _switchCameraButton.backgroundColor = [UIColor purpleColor];
+      // 设置图片的填充
+      [_switchCameraButton setImageEdgeInsets: UIEdgeInsetsMake(10, 5, 10, 5)];
+      [_switchCameraButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+      _switchCameraButton.frame = CGRectMake(self.width - 20 - 28, 20, 40, 40);
+      [_switchCameraButton addTarget:self action:@selector(clickSwitchCamera) forControlEvents:UIControlEventTouchUpInside];
     }
     return _switchCameraButton;
 }
@@ -255,9 +295,17 @@ static const CGFloat KMaxRecordTime = 60;    //最大录制时间
 - (UIButton *)backBtn{
     if (!_backButton) {
         _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_backButton setImage:[UIImage imageNamed:@"record_video_back"] forState:UIControlStateNormal];
-        _backButton.frame = CGRectMake(60, self.recordBtn.centerY - 18, 36, 36);
-        [_backButton addTarget:self action:@selector(clickBackButton) forControlEvents:UIControlEventTouchUpInside];
+      
+//        [_backButton setImage:[UIImage imageNamed:@"record_video_back"] forState:UIControlStateNormal];
+      
+      NSData *imageData = [[NSData alloc] initWithBase64EncodedString: backImageStr options:NSDataBase64DecodingIgnoreUnknownCharacters];
+      [_backButton setImage: [UIImage imageWithData:imageData] forState:UIControlStateNormal];
+      // 设置图片的填充
+      [_backButton setImageEdgeInsets: UIEdgeInsetsMake(10, 5, 10, 5)];
+      [_backButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+      
+      _backButton.frame = CGRectMake(60, self.recordBtn.centerY - 18, 40, 40);
+      [_backButton addTarget:self action:@selector(clickBackButton) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backButton;
 }
@@ -298,7 +346,14 @@ static const CGFloat KMaxRecordTime = 60;    //最大录制时间
 - (UIButton *)deleteBtn{
     if (!_deleteButton) {
       _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-      [_deleteButton setImage:[UIImage imageNamed:@"video_delete"] forState:UIControlStateNormal];
+      
+      NSData *imageData = [[NSData alloc] initWithBase64EncodedString: videoDelete options:NSDataBase64DecodingIgnoreUnknownCharacters];
+      [_deleteButton setImage: [UIImage imageWithData:imageData] forState:UIControlStateNormal];
+      // 设置图片的填充
+//      [_deleteButton setImageEdgeInsets: UIEdgeInsetsMake(10, 5, 10, 5)];
+      [_deleteButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+      
+//      [_deleteButton setImage:[UIImage imageNamed:@"video_delete"] forState:UIControlStateNormal];
       _deleteButton.frame = CGRectMake(60, self.recordBtn.centerY - 18, 36, 36);
       [_deleteButton addTarget:self action:@selector(deleteClick) forControlEvents:UIControlEventTouchUpInside];
       _deleteButton.alpha = 0;
@@ -330,14 +385,26 @@ static const CGFloat KMaxRecordTime = 60;    //最大录制时间
   }
   
   BOOL deleteStatus = [self.progressView getDeleteStatus];
-  [_deleteButton setImage:[UIImage imageNamed: deleteStatus ? @"video_delete_click" : @"video_delete"] forState:UIControlStateNormal];
+  
+  NSData *imageData = [[NSData alloc] initWithBase64EncodedString: deleteStatus ? videoClickDelete : videoDelete options:NSDataBase64DecodingIgnoreUnknownCharacters];
+  // 设置图片的填充
+//  [_deleteButton setImageEdgeInsets: UIEdgeInsetsMake(10, 5, 10, 5)];
+  [_deleteButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+  [_deleteButton setImage:[UIImage imageWithData:imageData] forState:UIControlStateNormal];
 }
 
 #pragma mark - 完成按钮
 - (UIButton *)finishBtn{
     if (!_finishButton) {
       _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
-      [_finishButton setImage:[UIImage imageNamed:@"video_finish"] forState:UIControlStateNormal];
+      
+      NSData *imageData = [[NSData alloc] initWithBase64EncodedString: videoFinsh options:NSDataBase64DecodingIgnoreUnknownCharacters];
+      [_finishButton setImage: [UIImage imageWithData:imageData] forState:UIControlStateNormal];
+      // 设置图片的填充
+//      [_finishButton setImageEdgeInsets: UIEdgeInsetsMake(10, 5, 10, 5)];
+      [_finishButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+      
+//      [_finishButton setImage:[UIImage imageNamed:@"video_finish"] forState:UIControlStateNormal];
       _finishButton.frame = CGRectMake(self.width, self.recordBtn.centerY - 18, 36, 36);
       [_finishButton addTarget:self action:@selector(finishClick) forControlEvents:UIControlEventTouchUpInside];
       _finishButton.alpha = 0;
@@ -462,6 +529,16 @@ static const CGFloat KMaxRecordTime = 60;    //最大录制时间
 - (void)stopTimer{
   [self.timer invalidate];
   self.timer = nil;
+}
+
+- (UIImage *)imageResize:(UIImage*)img andResizeTo:(CGSize)newSize {
+    CGFloat scale = [[UIScreen mainScreen]scale];
+    //UIGraphicsBeginImageContext(newSize);
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, scale);
+    [img drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 @end
