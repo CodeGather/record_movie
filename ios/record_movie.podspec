@@ -19,6 +19,7 @@ A new flutter plugin project.
   s.resources = ['Assets/*.png']
 
   s.dependency 'Flutter'
+  s.dependency 'MBProgressHUD'
   s.platform = :ios, '8.0'
 
   s.frameworks   = "CoreGraphics", "QuartzCore"

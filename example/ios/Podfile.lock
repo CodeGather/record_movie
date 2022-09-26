@@ -1,11 +1,17 @@
 PODS:
   - Flutter (1.0.0)
-  - record_movie (1.0.0):
+  - MBProgressHUD (1.2.0)
+  - record_movie (1.0.1):
     - Flutter
+    - MBProgressHUD
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - record_movie (from `.symlinks/plugins/record_movie/ios`)
+
+SPEC REPOS:
+  trunk:
+    - MBProgressHUD
 
 EXTERNAL SOURCES:
   Flutter:
@@ -15,8 +21,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  record_movie: c0afdf59b434ab59ba2cd41c7baa093751e39cf5
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  record_movie: 993ca1c8ae8e9ac0cee9071aed14feb23688e06f
 
 PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.11.3

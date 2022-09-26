@@ -168,11 +168,19 @@ public class Utils {
     public static long getVideoDuration(String mUri){
         long videoDuration = 0;
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        retriever.setDataSource(mUri); //在获取前，设置文件路径（应该只能是本地路径）
-        String duration = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
-        retriever.release(); //释放
-        if(!TextUtils.isEmpty(duration)){
-            videoDuration = Long.parseLong(duration);
+        try {
+            retriever.setDataSource(mUri); //在获取前，设置文件路径（应该只能是本地路径）
+            String duration = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+            if(!TextUtils.isEmpty(duration)){
+                videoDuration = Long.parseLong(duration);
+            }
+            try {
+                retriever.release();
+            } catch (RuntimeException ex) {
+                ex.printStackTrace();
+            }
+        } catch (IllegalArgumentException | IOException ex) {
+            ex.printStackTrace();
         }
         return videoDuration;
     }
