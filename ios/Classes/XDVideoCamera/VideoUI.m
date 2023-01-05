@@ -249,7 +249,8 @@ NSString * videoFinsh = @"iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAMAAAAL34HQAAAABGdBTU
       // 设置图片的填充
       [_flashButton setImageEdgeInsets: UIEdgeInsetsMake(5, 10, 5, 10)];
       [_flashButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-      _flashButton.frame = CGRectMake(10, 20, 40, 40);
+      CGFloat statusHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+      _flashButton.frame = CGRectMake(10, statusHeight, 40, 40);
       [_flashButton addTarget:self action:@selector(clickSwitchFlash) forControlEvents:UIControlEventTouchUpInside];
     }
     return _flashButton;
@@ -276,7 +277,8 @@ NSString * videoFinsh = @"iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAMAAAAL34HQAAAABGdBTU
       // 设置图片的填充
       [_switchCameraButton setImageEdgeInsets: UIEdgeInsetsMake(10, 5, 10, 5)];
       [_switchCameraButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-      _switchCameraButton.frame = CGRectMake(self.width - 20 - 28, 20, 40, 40);
+      CGFloat statusHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+      _switchCameraButton.frame = CGRectMake(self.width - 20 - 28, statusHeight, 40, 40);
       [_switchCameraButton addTarget:self action:@selector(clickSwitchCamera) forControlEvents:UIControlEventTouchUpInside];
     }
     return _switchCameraButton;

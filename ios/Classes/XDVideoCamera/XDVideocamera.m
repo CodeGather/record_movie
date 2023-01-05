@@ -325,12 +325,26 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 
  @param title 提示内容
  @param btn 取消按钮
- @return 提示框
  */
-- (UIAlertView *)noticeAlertTitle:(NSString *)title cancel:(NSString *)btn {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:nil delegate:self cancelButtonTitle:btn otherButtonTitles:nil, nil];
-    [alert show];
-    return alert;
+- (void)noticeAlertTitle:(NSString *)title cancel:(NSString *)btn {
+  //初始化提示框；
+    UIAlertController *alert = [
+      UIAlertController
+      alertControllerWithTitle: title
+      message: nil
+      preferredStyle: UIAlertControllerStyleAlert
+    ];
+   
+    [alert addAction: [
+      UIAlertAction actionWithTitle:@"确定"
+      style:UIAlertActionStyleDefault
+      handler:^(UIAlertAction * _Nonnull action) {
+        //点击按钮的响应事件；
+      }
+    ]];
+   
+    //弹出提示框；
+    [self presentViewController:alert animated:true completion:nil];
 }
 
 #pragma mark -- 清除视频Url路径下的缓存
@@ -451,8 +465,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
         if (weakSelf.deviceInput.device.position == AVCaptureDevicePositionFront) {
             croppedImage = [scaledImage croppedImage:cropFrame
                                      WithOrientation:UIImageOrientationUpMirrored];
-        }else
-        {
+        } else {
             croppedImage = [scaledImage croppedImage:cropFrame];
         }
         //横屏时旋转image
@@ -480,11 +493,17 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
   NSData *imageData = UIImagePNGRepresentation(savedImage);
   
   NSString *path = [self createFile: imageData];
-  
+
+//  double width = savedImage.size.width;
+//  double height = savedImage.size.height;
+//  
   [self.dict setObject:@"拍照完成" forKey:@"msg"];
   [self.dict setObject:@200 forKey: @"code"];
   [self.dict setObject:@(bool_true) forKey: @"status"];
   [self.dict setObject:path forKey: @"data"];
+//  [self.dict setObject:[UIImageJPEGRepresentation(savedImage, 1) length]/1024 forKey: @"size"];
+//  [self.dict setObject:CGImageGetWidth(savedImage.CGImage) forKey: @"width"];
+//  [self.dict setObject:height forKey: @"height"];
   
   NSFileManager *fileManager = [NSFileManager defaultManager];
   // NSData *data = [NSData dataWithContentsOfFile:storeUrl.path];
@@ -604,6 +623,11 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
                 //        //主线程执行
                 //        [alert dismissWithClickedButtonIndex:-1 animated:YES];
                 //      });
+    
+                      AVURLAsset * asset = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:info]];
+                      CMTime   time = [asset duration];
+                      CGFloat seconds = time.value/time.timescale;
+                      NSLog(@"视频时长：%f", seconds);
                       if (successBlock) {
                         [self.dict setObject:@"录制完成" forKey: @"msg"];
                         [self.dict setObject:@200 forKey: @"code"];
