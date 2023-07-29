@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text('返回数据: $_resultMsg\n'),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () async{
                   final data = await RecordMovie.startRecord(parame: {
                     "isSaveGallery": false
@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
                 },
                 child: Text('开始录制'),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () async{
                   await RecordMovie.cleanCache();
                 },
